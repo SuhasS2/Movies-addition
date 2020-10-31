@@ -21,6 +21,7 @@ const connectDatabase = async (req, res, next) => {
         next();
     }
     catch (error) {
+        console.log(error);
         return res.send("Database not connected");
     }
 }
@@ -28,10 +29,10 @@ const connectDatabase = async (req, res, next) => {
 app.use(cors());
 app.use(connectDatabase);
 
-app.get('/:searchValue', async (req, res) => {
+app.get('/getMovies/:searchValue', async (req, res) => {
     const { searchValue } = req.params;
     const moviesCollection = nativeClient.db("training").collection("movies");
-    const moviesData = await moviesCollection.find({Title:searchValue}).toArray();
+    const moviesData = await moviesCollection.find({title:searchValue}).toArray();
     return res.send(moviesData);
 });
 
