@@ -28,3 +28,10 @@ db.once('open', async () => {
         console.log(`Example app listening at http://localhost:${port}`);
     });
 })
+
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+  });
+}

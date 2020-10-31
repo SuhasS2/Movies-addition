@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Container } from "reactstrap";
+import { 
+  Container,
+  Button,
+  Card,
+  CardBody,
+  CardImg,
+  CardText,
+  CardTitle
+ } from "reactstrap";
 
 export default function BookingPage() {
   const [loading, setLoading] = useState(false);
@@ -10,15 +18,21 @@ export default function BookingPage() {
 
   useEffect(() => {
     getMovieDetail();
+    console.log(data)
   }, []);
+
+  function onClickBook() {
+    alert("Ticket Booked Successfully");
+  }
 
   function getMovieDetail() {
     setLoading(true);
     fetch(`http://localhost:5000/getMovies/${movieId}`)
       .then((response) => response.json())
       .then((result) => {
+        const [movieDetails]=result;
         setLoading(false);
-        setData(result);
+        setData(movieDetails);
       })
       .catch((error) => {
         setLoading(false);
@@ -26,41 +40,37 @@ export default function BookingPage() {
       });
   }
 
-  function onClickBook() {
-    alert("Ticket Booked");
-  }
-
+  
   return (
     <Container>
       {loading ? (
-        <h3>Loading...</h3>
+        <h3>Loading.......</h3>
       ) : (
         <>
-          <h2>{data.title}</h2>
-          <h4>Year: {data.year}</h4>
-          <p>
-            <img src={data.poster} alt="img" className="img-thumbnail" />
-          </p>
-          <p>PLOT</p>
-          <p>{data.plot}</p>
-          <h5>Rating: {data.imdbRating}</h5>
-          <h6>Language: {data.language}</h6>
-          <h6>Country: {data.country}</h6>
+        <section className="movie-details-section">
+          <br/>
+          <h1 color="tomato">Movie Details</h1>
           <br />
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={onClickBook}
-          >
-            Book Ticket
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={() => history.goBack()}
-          >
-            Go Back
-          </button>
+          <h2>{data.title}</h2>
+          <br/>
+          <Card>
+            <CardImg
+                top
+                style={{ height: "480px", width: "360px" }}
+                src={data.poster}
+                alt="Card image cap"
+              />
+            <CardBody>
+            <CardText>
+                  <h3>ImdbId:{data.imdbId}</h3>
+                  <h4>Year:{data.year}</h4>
+                </CardText>
+                <Button className="btn btn-dark">
+                  Back
+                </Button> 
+            </CardBody>
+          </Card>
+        </section>
         </>
       )}
     </Container>

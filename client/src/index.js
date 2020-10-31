@@ -7,7 +7,6 @@ import App from "./App";
 import AddMovie from "./components/AddMovie";
 import BookingPage from "./components/BookingPage";
 import Header from "./components/Header";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
 

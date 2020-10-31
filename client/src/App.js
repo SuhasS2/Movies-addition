@@ -12,6 +12,7 @@ import {
   Button
 } from "reactstrap";
 import SearchSection from "./components/SearchSection";
+import AddMovie from './components/AddMovie';
 
 export default function App() {
   const [data, setData] = useState({});
@@ -39,8 +40,6 @@ export default function App() {
       .then((result) => setData(result))
       .catch((error) => console.log("error", error));
   }
-
-  function onClick4Booking(imdbID) {}
 
   return (
     <Container style={{ marginTop: "60px" }}>
