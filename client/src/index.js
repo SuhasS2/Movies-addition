@@ -20,12 +20,14 @@ ReactDOM.render(
       <Header />
       <main>
         <Switch>
-          <Route path="/booking-page/add-movie">
+          <Route path="/add-movie">
             <AddMovie />
           </Route>
+
           <Route path="/booking-page/:movieId">
             <BookingPage />
           </Route>
+          
           <Route path="/">
             <App />
           </Route>

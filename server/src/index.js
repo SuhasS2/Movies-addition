@@ -36,6 +36,8 @@ app.get('/getMovies/:searchValue', async (req, res) => {
     return res.send(moviesData);
 });
 
+
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
